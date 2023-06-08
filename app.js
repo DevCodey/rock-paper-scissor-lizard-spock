@@ -85,7 +85,7 @@ function playGame(userPick, aiSelection) {
 function scoreGame(){
   while(userScore <= 5 && aiScore <= 5){
     const results = playGame(userSelection, aiSelection);
-    resultsDisplay.childNodes[0].textContent = results
+    resultsDisplay.childNodes[1].textContent = results;
     if(results.slice(4,5) === "W"){
       return userScore++;
     }else if(results.slice(4,5) === "L"){
@@ -97,8 +97,8 @@ function scoreGame(){
 }
 
 function displayCurrentScore(){
-  resultsDisplay.childNodes[2].textContent = `Your Score: ${userScore}`;
-  resultsDisplay.childNodes[4].textContent = `AI Score: ${aiScore}`;
+  resultsDisplay.childNodes[3].childNodes[1].textContent = `Your Score: ${userScore}`;
+  resultsDisplay.childNodes[3].childNodes[3].textContent = `AI Score: ${aiScore}`;
 }
 
 function checkScore(){
