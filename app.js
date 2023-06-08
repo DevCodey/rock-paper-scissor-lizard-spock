@@ -1,16 +1,20 @@
 let userSelection = '';
-let aiSelection = '';
-
-const userSelections = document.querySelectorAll('.selection');
+let aiSelection = '';  
+let userScore = 0;
+let aiScore = 0;
+const userSelections = document.querySelectorAll(".selection");  
+const resultsDisplay = document.querySelector("#results");
 userSelections.forEach(selection =>{
   selection.addEventListener("click", (e)=>{
     userSelection = getUserChoice(e);
   })
-  selection.addEventListener("click", ()=>{
+  selection.addEventListener("click", (e)=>{
     aiSelection = getComputerChoice();
   })
-  selection.addEventListener("click", ()=>{
-    console.log(playGame(userSelection, aiSelection));
+  selection.addEventListener("click", (e)=>{
+    scoreGame();
+    displayCurrentScore();
+    checkScore();
   })
 })
 
@@ -27,7 +31,6 @@ function getComputerChoice() {
 };
 
 function playGame(userPick, aiSelection) {
-
     if(userPick === 'Rock' && aiSelection === 'Rock'){
       return 'Tie!'
     }else if(userPick ==='Rock' && aiSelection === 'Paper'){
@@ -37,7 +40,7 @@ function playGame(userPick, aiSelection) {
     }else if(userPick ==='Rock' && aiSelection === 'Spock'){
       return 'You Lose! Spock vaporizes rock!'
     }else if(userPick ==='Rock' && aiSelection === 'Lizard'){
-      'You Win! Rock crushes lizard!'
+      return 'You Win! Rock crushes lizard!'
     }else if(userPick ==='Paper' && aiSelection === 'Paper'){
       return 'Tie!'
     }else if(userPick ==='Paper' && aiSelection === 'Scissors'){
@@ -77,4 +80,37 @@ function playGame(userPick, aiSelection) {
     }else{
       return 'You Win! Lizard poisons spock'
     }
+}
+
+function scoreGame(){
+  while(userScore <= 5 && aiScore <= 5){
+    const results = playGame(userSelection, aiSelection);
+    resultsDisplay.childNodes[0].textContent = results
+    if(results.slice(4,5) === "W"){
+      return userScore++;
+    }else if(results.slice(4,5) === "L"){
+      return aiScore++;
+    }else{
+      return "Tie!";
+    }
+  }
+}
+
+function displayCurrentScore(){
+  resultsDisplay.childNodes[2].textContent = `Your Score: ${userScore}`;
+  resultsDisplay.childNodes[4].textContent = `AI Score: ${aiScore}`;
+}
+
+function checkScore(){
+    if(userScore === 5){
+    userSelections.forEach(selection => {
+      selection.setAttribute('disabled', true);
+      })
+      resultsDisplay.textContent = `You Won! 😎\n The final score is ${userScore} to ${aiScore}`;
+  }else if(aiScore === 5){
+      userSelections.forEach(selection => {
+        selection.setAttribute('disabled', true);
+      })   
+      resultsDisplay.textContent = `You Lost. 😓\n The final score is ${aiScore} to ${userScore}`;
+  }
 }
