@@ -1,80 +1,77 @@
-function getComputerChoice() {
-  const computerChoice = Math.floor(Math.random() * 5 + 1);
-  switch (computerChoice) {
-    case 1:
-      return 'Rock'
-      break;
-    case 2:
-      return 'Paper'
-      break;
-    case 3: 
-    return 'Scissors'
-    break;
-    case 4:
-    return 'Lizard'
-    break;
-    case 5:
-    return 'Spock'
-    break;
-    default:
-      break;
-  }
-}
+const selection = ['Rock', 'Paper', 'Scissors', 'Lizard', 'Spock'];
 
-function playerSelection(){
-  const playerChoice = prompt('Rock, Paper, Scissors, Lizard or Spock?').toUpperCase();
-    switch (playerChoice) {
-    case 'ROCK':
-      return 'Rock'
-      break;
-    case 'PAPER':
-      return 'Paper'
-      break;
-    case 'SCISSORS': 
-    return 'Scissors'
-    break;
-    case 'LIZARD':
-    return 'Lizard'
-    break;
-    case 'SPOCK':
-    return 'Spock'
-    break;
-    default:
-      prompt('Please enter either rock, paper, scissors, lizard or spock.')
-      break;
-  }
+function getComputerChoice() {
+  let computerChoice = Math.floor(Math.random() * 5);
+  computerChoice = selection[computerChoice];
+  console.log(`AI: ${computerChoice}`);
+  return computerChoice;
+};
+
+function getPlayerSelection(){
+  let playerChoice = prompt('Rock, Paper, Scissors, Lizard or Spock?').toLowerCase();
+  let char = playerChoice.charAt(0).toUpperCase();
+  playerChoice = char + playerChoice.slice(1);
+  console.log(`User: ${playerChoice}`);
+  return playerChoice;
 }
 
 function playGame(userPick, aiPick) {
-  console.log(userPick,aiPick);
-  switch (userPick, aiPick) {
-    case 'Rock' && 'Lizard':
-    return 'You Win! Rock crushes lizard'
-      break;
-    case 'Paper' && 'Rock':
-    return 'You Win! Paper covers rock!'
-      break;
-    case 'Scissors' && 'Paper':
-    return 'You Win! Scissors cuts paper'
-      break; 
-    case 'Lizard' && 'Spock':
-      return 'You Win! Lizard poisons Spock'
-        break;
-    case 'Spock' && 'Scissors':
-      return 'You Win! Spock smashes scissors'
-        break;
-    case 'Scissors' && 'Lizard':
-      return 'You Win! Scissors decapitates lizard'
-    case 'Lizard' && 'Paper':
-      return 'You Win! Lizard eats paper'
-    case 'Paper' && 'Spock':
-      return 'You Win! Paper disproves spock'
-    case 'Spock' && 'Rock':
-      return 'You Win! Spock vaporizes rock'
-    case 'Rock' && 'Scissors':
-      return 'You Win! Rock crushes scissors'
-    default:
-      break;
-  }
-  
+
+    if(userPick === 'Rock' && aiPick === 'Rock'){
+      return 'Tie!'
+    }else if(userPick ==='Rock' && aiPick === 'Paper'){
+      return 'You Lose! Paper covers rock!'
+    }else if(userPick ==='Rock' && aiPick === 'Scissors'){
+      return 'You Win! Rock crushes scissors!'
+    }else if(userPick ==='Rock' && aiPick === 'Spock'){
+      return 'You Lose! Spock vaporizes rock!'
+    }else if(userPick ==='Rock' && aiPick === 'Lizard'){
+      'You Win! Rock crushes lizard!'
+    }else if(userPick ==='Paper' && aiPick === 'Paper'){
+      return 'Tie!'
+    }else if(userPick ==='Paper' && aiPick === 'Scissors'){
+      return 'You Lose! Scissors cuts paper!'
+    }else if(userPick ==='Paper' && aiPick === 'Spock'){
+      return 'You Win! Paper disproves spock!'
+    }else if(userPick ==='Paper' && aiPick ===  'Lizard'){
+      return 'You Lose! Lizard eats paper!'
+    }else if(userPick ==='Scissors' && aiPick === 'Scissors'){
+      return 'Tie!'
+    }else if(userPick ==='Scissors' && aiPick === 'Spock'){
+      return 'You Lose! Spock smashes scissors!'
+    }else if(userPick ==='Scissors' && aiPick === 'Lizard'){
+      return 'You Win! Scissors decapitates lizard!'
+    }else if(userPick ==='Scissors' && aiPick === 'Rock'){
+      return 'You Lose! Rock crushes scissors!'
+    }else if(userPick ==='Scissors' && aiPick ===  'Paper'){
+      return 'You Win! Scissors cuts paper!'
+    }else if(userPick ==='Spock' && aiPick === 'Spock'){
+      return 'Tie!'
+    }else if(userPick === 'Spock' && aiPick === 'Lizard'){
+      return 'You Lose! Lizard poisons spock!'
+    }else if(userPick === 'Spock' && aiPick === 'Scissors'){
+      return 'You Win! Spock smashes scissors!'
+    }else if(userPick === 'Spock' && aiPick === 'Paper'){
+      return 'You Lose! Paper disproves spock!'
+    }else if(userPick === 'Spock' && aiPick === 'Rock'){
+      return 'You Win! Spock vaporizes rock!'
+    }else if(userPick === 'Lizard' && aiPick === 'Lizard'){
+      return 'Tie'
+    }else if(userPick === 'Lizard' && aiPick === 'Rock'){
+      return 'You Lose! Rock smashes lizard'
+    }else if(userPick === 'Lizard' && aiPick === 'Paper'){
+      return 'You Win! Lizard eats Paper'
+    }else if(userPick === 'Lizard' && aiPick === 'Scissors'){
+      return 'You Lose! Scissors decapitates lizard!'
+    }else{
+      return 'You Win! Lizard poisons spock'
+    }
 }
+
+function game(){
+  for (let i = 0; i < 5; i++) {
+  console.log(playGame(getPlayerSelection(), getComputerChoice()));
+  }
+}
+
+game();
